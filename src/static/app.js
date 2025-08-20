@@ -29,7 +29,21 @@ document.addEventListener("DOMContentLoaded", () => {
             participantsHTML += `<li class='participant-item'>${email}</li>`;
           });
         }
-        participantsHTML += "</ul>";
+        const participantsList = document.createElement("ul");
+        participantsList.className = "participants-list";
+        if (details.participants.length === 0) {
+          const noParticipantsItem = document.createElement("li");
+          noParticipantsItem.className = "no-participants";
+          noParticipantsItem.textContent = "No participants yet";
+          participantsList.appendChild(noParticipantsItem);
+        } else {
+          details.participants.forEach(email => {
+            const participantItem = document.createElement("li");
+            participantItem.className = "participant-item";
+            participantItem.textContent = email;
+            participantsList.appendChild(participantItem);
+          });
+        }
 
         activityCard.innerHTML = `
           <h4>${name}</h4>
